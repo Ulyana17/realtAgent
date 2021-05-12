@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html xmlns ="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Realtagency.by</title>
+    <link th:href = "@{/static/css/style.css}" rel = "stylesheet">
+    <script src="https://kit.fontawesome.com/c8d6f3c5ba.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="modal" id="auth-menu" tabindex="-1" aria-labelledby="auth-menu" aria-hidden="true">
+    <div class="modal-dialog align-items-center modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title h-giant">
+                    Авторизация
+                </div>
+                <img th:src="@{/static/img/close.svg}" class="close" data-dismiss="modal" aria-label="Close" alt="Закрыть">
+            </div>
+            <div class="ml-10 mr-10 alert alert-info" style="display:none;">Для того чтобы воспользоваться функцией необходимо войти под своей учетной записью
+            </div>
+            <div class="border-center-icon color-gray fs-small">
+            </div>
+            <div class="modal-body">
+                <div class="social-icons justify-content-center">
+                </div>
+            </div>
+            <div class="border-center-icon color-gray fs-small"> <span>Либо через пароль</span>
+            </div>
+            <div class="modal-body"> <form action="https://realt.by/login/" data-default_action="https://realt.by/login/" method="POST">
+                <div class="form-group"> <input type="text" name="user" class="form-control" placeholder="Логин / email / телефон" title="Логин / email / телефон">
+                </div>
+                <div class="form-group"> <input type="password" name="pass" class="form-control" placeholder="Пароль" title="Пароль">
+                </div>
+                <div class="row align-items-center sm-gutters">
+                    <div class="col"> <input type="submit" class="btn btn-primary" value="Войти"> </div> <div class="col-auto"> <a href="https://realt.by/forgot/">Забыли пароль?</a> </div>
+                </div> <input type="hidden" name="permalogin" value="1"> <input type="hidden" name="logintype" value="login"> <input type="hidden" name="pid" value="69"> </form>
+            </div>
+            <div class="border-center-icon color-gray fs-small"> <span>Нет аккаунта?</span>
+            </div>
+            <div class="modal-body text-center">
+                <div class="form-group"> <a href="https://realt.by/login/" class="btn btn-outline-primary">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- MAIN-HEADER -->
+<div class="main-header">
+    <div class="header-top" style="margin-bottom: 0px;">
+        <div class="container">
+            <div class="header-top-content">
+                <div class="header-left" >
+                    <div class="region-selection">
+                        <a href="javascript:void(0);" class="d-flex align-items-center color-black">
+                            <svg width="12" height="16" fill="none" class="fill-black" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM8 6a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.13C12 11 6 16 6 16s-6-5-6-9.88A6.06 6.06 0 016 0c3.31 0 6 2.74 6 6.13zm-1 0c0 2.07-1.3 4.3-2.78 6.13A24.31 24.31 0 016 14.66a22.24 22.24 0 01-2.22-2.4C2.3 10.44 1 8.2 1 6.13A5.06 5.06 0 016 1c2.74 0 5 2.27 5 5.13z"></path>
+                            </svg>
+                            <span class="media-body ml-6" th:text = "${gorod} + ' и обл.'"></span>
+                        </a>
+                        <div id="city-selection" class="list-group list-group-sm list-group-flush">
+                            <a class="list-group-item color-black" href="/" data-id="5">Минск и обл.</a>
+                            <a class="list-group-item color-black" href="/brest-region" data-id="1">Брест и обл.</a>
+                            <a class="list-group-item color-black" href="/vitebsk-region" data-id="2">Витебск и обл.</a>
+                            <a class="list-group-item color-black" href="/gomel-region" data-id="3">Гомель и обл.</a>
+                            <a class="list-group-item color-black" href="/grodno-region" data-id="4">Гродно и обл.</a>
+                            <a class="list-group-item color-black" href="/mogilev-region" data-id="6">Могилев и обл.</a>
+                        </div>
+                    </div>
+                    <a href="https://realt.by/statistics/" target="_blank" data-toggle="tooltip" class="color-success d-inline-flex d-sm-none d-lg-flex flex-grow-1 index-price" title="" data-original-title="Индекс цен предложения на квартиры в Минске"> $ 1.225 м² </a>
+                </div>
+                <div class="header-right">
+                    <a href="javascript:void(0);" onclick="javascript:showLoginBox(&#39;Для просмотра заявок необходимо войти на сайт, используя один из способов авторизации!&#39;);" class="media align-items-center" title="Для использования этой функции зарегистрируйтесь или войдите на сайт!">
+                        <svg width="14" height="12" fill="none" class="fill-gray" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 0a2 2 0 00-2 2v8.99c0-.37.1-.75.33-1.1l2.63-4c.37-.55.99-.89 1.66-.89H10V4a2 2 0 00-2-2H6a2 2 0 00-2-2H2z">
+
+                            </path>
+                            <path d="M4.62 6a.98.98 0 00-.82.45l-2.63 4A1 1 0 001.99 12h8.4c.32 0 .63-.17.81-.45l2.63-4A1 1 0 0013.01 6h-8.4z">
+
+                            </path>
+                        </svg>
+                        <span class="media-body ml-6">Заявки</span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="javascript:showLoginBox(&#39;Чтобы посмотреть сообщения необходимо войти на сайт, используя один из способов авторизации!&#39;);" class="media align-items-center" title="Для использования этой функции зарегистрируйтесь или войдите на сайт!">
+                        <svg width="14" height="12" fill="none" class="fill-gray" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.97 1.68A2 2 0 0012 0H2A2 2 0 00.03 1.68l5.77 4.9c.65.56 1.75.56 2.4 0l5.77-4.9z"></path>
+                            <path d="M14 2.97L8.85 7.35a2.95 2.95 0 01-3.7 0L0 2.97V10c0 1.1.9 2 2 2h10a2 2 0 002-2V2.97z"></path>
+                        </svg>
+                        <span class="media-body ml-6">Сообщения</span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="javascript:showLoginBox(&#39;Чтобы посмотреть избранное необходимо войти на сайт, используя один из способов авторизации!&#39;);" class="media align-items-center" title="Для использования этой функции зарегистрируйтесь или войдите на сайт!">
+                        <svg width="14" height="12" fill="none" class="fill-gray" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2.41A4.26 4.26 0 004.44.13C3.08-.27 1.6.23.58 1.85A3.5 3.5 0 00.04 4.3c.13.82.54 1.6 1.13 2.39 1.16 1.54 3.16 3.23 5.57 5.22a.4.4 0 00.52 0c2.4-2 4.4-3.68 5.57-5.22.59-.78 1-1.57 1.13-2.4a3.5 3.5 0 00-.54-2.44c-1-1.61-2.5-2.12-3.86-1.72A4.26 4.26 0 007 2.4z"></path>
+                        </svg>
+                        <span class="media-body ml-6">Избранное</span>
+                    </a>
+                    <div class="auth-link">
+                        <a href="javascript:void(0);" onclick="javascript:showLoginBox();" class="btn btn-outline-gray btn-sm btn-icon">
+                            <svg width="14" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 6a3 3 0 100-6 3 3 0 000 6zM5.06 6.72A4.43 4.43 0 000 11.12c0 .48.4.88.89.88H13.1c.5 0 .89-.4.89-.89 0-2.7-2.39-4.77-5.06-4.39l-.55.08c-.92.13-1.86.13-2.78 0l-.55-.08z"></path>
+                            </svg>
+                            <span>Войти</span>
+                        </a>
+                    </div>
+                    <div class="currency-calc">
+                        <a class="btn btn-sm">
+                            <div class="currency-calc-items">
+                                <span>BYN</span>
+                                <span>USD</span>
+                            </div>
+                        </a>
+                        <div class="list-group list-group-sm list-group-flush">
+                            <div class="list-group-item color-graydark fs-small lh-small">Калькулятор валют:</div>
+                            <a class="list-group-item color-primary" data-currency="840" title="Показывать в Белорусских рублях + в Долларах США">BYN / USD</a> <a class="list-group-item color-black" data-currency="978" title="Показывать в Белорусских рублях + в Евро">BYN / EUR</a>
+                            <a class="list-group-item color-black" data-currency="643" title="Показывать в Белорусских рублях + в Российских рублях">
+                                BYN / RUB
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "wrapper" th:style = "'background: url('+ @{/static/img/bg.jpg}+ ') repeat-y; background-size:100%'">
+        <div class = "inner-content" style = " margin-left: 29%;">
+            <div class = "inner-center-content" style = "  background-color: #ffffff8f;" th:each = "Infohome : ${specialist}">
+                <h1 class = "f24" style = "margin:2%" th:text = "${specialist.name} + ' ' + ${specialist.surname}"></h1>
+                <div class = "user-item">
+                    <div class = "status">
+                        <div class = "status-top" th:text = "${specialist.post}"></div>
+                        <div class = "status-left"></div>
+                        <div class = "status-right">
+                            <span class = "views grey" th:text = "${specialist.views}"></span>
+                        </div>
+                    </div>
+                    <div class = "user-item-header">
+                        <div class = "user-item-left avatar">
+                            <img th:src = "${specialist.img}" th::alt = "${specialist.name} + ' ' + ${specialist.surname}" width = "100" height="100">
+                        </div>
+                        <div class = "user-item-right">
+                            <div class = "user-mini-info">
+                                <div class = "agentstvo-max-logo" th:each = "agency : ${agency}">
+                                    <a th:href="'/agencies/'+ ${agency.idagency}" >
+                                        <img th:src = "${agency.img}" width="225" height="225">
+                                    </a>
+                                </div>
+                                <p>
+                                    <span>Компания:</span>
+                                    <a th:href="'/agencies/'+ ${agency.idagency}" th:text = "${agency.name} + '/' + *{agency.addres}" ></a>
+                                </p>
+                                <p th:text = "'Регионы работы:' + ${agency.city}">
+                                </p>
+                                <p th:text = "'Опыт работы(лет):' + ${specialist.exp}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "clear"></div>
+                    <div class = "user-rating">
+                        <div class = "user-rating-item">
+                            <div class = "rating-nums">
+                                <div class = "rating-nums-item">
+                                    <p>Внимательность</p>
+                                    <div class = "star-content">
+                                        <span th:each="star1 : ${star1}">
+                                            <i th:class = "'fa fa-star' + ${star1}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class = "rating-nums-item">
+                                    <p>Компетентность</p>
+                                    <div class = "star-content">
+                                        <span th:each="star2 : ${star2}">
+                                            <i th:class = "'fa fa-star' + ${star2}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class = "rating-nums-item">
+                                    <p>Ответственность</p>
+                                    <div class = "star-content">
+                                        <span th:each="star3 : ${star3}">
+                                            <i th:class = "'fa fa-star' + ${star3}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class = "rating-nums-item">
+                                    <p>Пунктуальность</p>
+                                    <div class = "star-content">
+                                        <span th:each="star4 : ${star4}">
+                                            <i th:class = "'fa fa-star' + ${star4}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "user-text">
+                        <div class = "user-text-item">
+                            <div class = "title-grey">Обо мне</div>
+                        </div>
+                        <p th:text = "${specialist.info}"></p>
+                        <p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row with-mb">
+                <div class="footer-item col-sm-6 col-lg-3">
+                    <div>©&nbsp;2005-2021<br>Недвижимость на REALTAGENCY.BY</div>
+                    <div>
+                        <div>Мы в соц. сетях:</div>
+                        <div class="social-icons">
+                            <a href="" terget="_blank"><img th:src="@{/static/img/fb.svg}" alt="Facebook"></a>
+                            <a href="https://vk.com/pandochka_ulya" terget="_blank"><img th:src="@{/static/img/vk.svg}" alt="Vkontakte"></a>
+                            <a href="https://www.instagram.com/pando4ka_ulya" terget="_blank"><img th:src="@{/static/img/in.svg}" alt="Instagram"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-item col-sm-6 col-lg-3">
+                    <div>
+                        Электронная почта: <br> <a href="email:dragneel.ul.17@gmail.com">dragneel.ul.17@gmail.com</a>
+                    </div>
+                    <div>Размещение рекламы:</div>
+                    <div> <a href="https://realt.by/advert/price-list/" target="_blank">Прейскурант</a></div>
+                    <ul> <li><a href="tel:+375292263457">+375 (29) 226-34-57</a> – velcom</li>
+                        <li><a href="tel:+375333280337">+375 (33) 328-03-37</a> – mts</li>
+                        <li><a href="tel:+375173524444">+375 (17) 352-44-44</a> – город</li> </ul>
+                </div>
+                <div class="footer-item col-sm-6">
+                    <div>
+                        Использование портала означает согласие с
+                        <a href="https://realt.by/advert/agreement/">Пользовательским соглашением</a> и
+                        <a href="https://realt.by/about/gdpr/">Политикой конфиденциальности</a>.
+                        Оплата за рекламные услуги осуществляется на основании <a href="https://realt.by/advert/public/">публичного договора</a>.
+                    </div>
+                    <div class="rating-schema">
+                        <span itemscope="" id="side_rating" itemtype="http://schema.org/Product">
+                            <meta itemprop="name" content="Недвижимость, коммерческая недвижимость в Минске и Беларуси">
+                            <meta itemprop="description" content="Недвижимость в Минске и в Беларуси. Портал RealtAgency.by предлагает большой выбор актуальных предложений аренды и продажи недвижимости в Минске и по всей Беларуси">
+                        <div class="mb-10">Наш рейтинг:
+                            <span itemprop="">4.89</span> из 5 (на основании <span>1493</span> отзывов)
+                        </div>
+                            <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                                <meta itemprop="ratingValue" content="4.89">
+                                <meta itemprop="bestRating" content="5">
+                                <meta itemprop="ratingCount" content="1493">
+                            </span>
+                        <div class="footer-rating mb-10 stars">
+                            <a onclick="showLoginBox(&#39;Войдите на сайт используяодин из способов, чтобы поставить оценку!&#39;);" title="Оценить на 1 из 5" class="mr-6">
+                                <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.32.46a.74.74 0 011.36 0l1.8 4.07c.11.25.34.42.6.46l4.25.52c.64.08.9.9.43 1.37L12.6 9.92a.81.81 0 00-.23.73l.84 4.4c.12.67-.55 1.18-1.1.85l-3.75-2.2a.72.72 0 00-.74 0L3.9 15.9c-.56.33-1.23-.18-1.1-.84l.83-4.4a.81.81 0 00-.23-.74L.24 6.88C-.23 6.42.03 5.59.67 5.5L4.92 5a.76.76 0 00.6-.46L7.32.46z"></path>
+                                </svg>
+                            </a>
+                            <a onclick="showLoginBox(&#39;Войдите на сайт используяодин из способов, чтобы поставить оценку!&#39;);" title="Оценить на 2 из 5" class="mr-6">
+                                <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.32.46a.74.74 0 011.36 0l1.8 4.07c.11.25.34.42.6.46l4.25.52c.64.08.9.9.43 1.37L12.6 9.92a.81.81 0 00-.23.73l.84 4.4c.12.67-.55 1.18-1.1.85l-3.75-2.2a.72.72 0 00-.74 0L3.9 15.9c-.56.33-1.23-.18-1.1-.84l.83-4.4a.81.81 0 00-.23-.74L.24 6.88C-.23 6.42.03 5.59.67 5.5L4.92 5a.76.76 0 00.6-.46L7.32.46z">                                    </path>
+                                </svg>
+                            </a>
+                            <a onclick="showLoginBox(&#39;Войдите на сайт используяодин из способов, чтобы поставить оценку!&#39;);" title="Оценить на 3 из 5" class="mr-6">
+                                <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.32.46a.74.74 0 011.36 0l1.8 4.07c.11.25.34.42.6.46l4.25.52c.64.08.9.9.43 1.37L12.6 9.92a.81.81 0 00-.23.73l.84 4.4c.12.67-.55 1.18-1.1.85l-3.75-2.2a.72.72 0 00-.74 0L3.9 15.9c-.56.33-1.23-.18-1.1-.84l.83-4.4a.81.81 0 00-.23-.74L.24 6.88C-.23 6.42.03 5.59.67 5.5L4.92 5a.76.76 0 00.6-.46L7.32.46z"></path>
+                                </svg>
+                            </a>
+                            <a onclick="showLoginBox(&#39;Войдите на сайт используя один из способов, чтобы поставить оценку!&#39;);" title="Оценить на 4 из 5" class="mr-6">
+                                <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.32.46a.74.74 0 011.36 0l1.8 4.07c.11.25.34.42.6.46l4.25.52c.64.08.9.9.43 1.37L12.6 9.92a.81.81 0 00-.23.73l.84 4.4c.12.67-.55 1.18-1.1.85l-3.75-2.2a.72.72 0 00-.74 0L3.9 15.9c-.56.33-1.23-.18-1.1-.84l.83-4.4a.81.81 0 00-.23-.74L.24 6.88C-.23 6.42.03 5.59.67 5.5L4.92 5a.76.76 0 00.6-.46L7.32.46z"></path>
+                                </svg>
+                            </a>
+                            <a onclick="showLoginBox(&#39;Войдите на сайт используяодин из способов, чтобы поставить оценку!&#39;);" title="Оценить на 5 из 5" class="mr-6">
+                                <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.32.46a.74.74 0 011.36 0l1.8 4.07c.11.25.34.42.6.46l4.25.52c.64.08.9.9.43 1.37L12.6 9.92a.81.81 0 00-.23.73l.84 4.4c.12.67-.55 1.18-1.1.85l-3.75-2.2a.72.72 0 00-.74 0L3.9 15.9c-.56.33-1.23-.18-1.1-.84l.83-4.4a.81.81 0 00-.23-.74L.24 6.88C-.23 6.42.03 5.59.67 5.5L4.92 5a.76.76 0 00.6-.46L7.32.46z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </span>
+                        <script type="text/javascript">
+                            function estimate(value)
+                            {
+                                confirmation("Вы действительно хотите поставить оценку " + value + "?", "Да", "Отмена", function (result) {
+                                    if (result == true){
+                                        $.get('//' + location.hostname + '/?eID=tx_uedbrating_add_rate&rate=' + value , function (data) {
+                                            notification(data,'ОК');
+                                        });
+                                    }
+                                });
+
+                            }
+                        </script></div>
+                    <div>
+                        <!--begin of Rambler's Top100 code -->
+                        <div id="Rambler-counter" style="display: inline;" class="mr-16"><a href="https://top100.rambler.ru/home?id=808435" target="_blank"><img src="./static/img/saved_resource" title="Rambler&#39;s Top100" alt="Rambler&#39;s Top100" border="0"></a></div>	<script type="text/javascript">
+                        var _top100q = _top100q || [];
+                        _top100q.push(['setAccount', '808435']);
+                        _top100q.push(['trackPageviewByLogo', document.getElementById('Rambler-counter')]);
+
+                        (function(){
+                            var pa = document.createElement("script");
+                            pa.type = "text/javascript";
+                            pa.async = true;
+                            pa.src = ("https:" == document.location.protocol ? "https:" : "http:") + "//st.top100.ru/top100/top100.js";
+                            var s = document.getElementsByTagName("script")[0];
+                            s.parentNode.insertBefore(pa, s);
+                        })();
+                    </script>	<!--end of Top100 logo -->	<!--LiveInternet counter-->	<script type="text/javascript"><!--
+                    document.write("<a href='//www.liveinternet.ru/click' "+
+                        "target=_blank><img src='//counter.yadro.ru/hit?t17.6;r"+
+                        escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                            ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                            screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                        ";"+Math.random()+
+                        "' alt='' title='LiveInternet: показано число просмотров за 24"+
+                        " часа, посетителей за 24 часа и за сегодня' "+
+                        "border='0' width='88' height='31'><\/a>")
+                    //-->
+                    </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row with-mb">
+                    <div class="footer-item col-lg-8">
+                        <div>
+                            <div>Оказание услуг ООО «РиэлтАгенствоБай», УНП 191179379</div>
+                            <div>Свидетельство о регистрации №0173045 выданное 25 ноября 2009 г. горисполкомом Фрунзенского р-на г. Минска</div>
+                            <div>220019, г. Минск, ул.Максима Горецкого, 51, оф. 13. Время работы 9:00-18:00 (сб, вс – выходной)</div>
+                        </div>
+                        <div class="footer-payment scrolling-x-md">
+                            <img th:src="@{/static/img/visa.png}" alt="VISA">
+                            <img th:src="@{/static/img/visa-secure.png}" alt="VISA Secure">
+                            <img th:src="@{/static/img/mastercard.png}" alt="MasterCard">
+                            <img th:src="@{/static/img/secure-mastercard.png}" alt="MasterCard SecureCode">
+                            <img th:src="@{/static/img/express.png}" alt="American Express">
+                            <img th:src="@{/static/img/belkart.png}" alt="Белкарт">
+                            <img th:src="@{/static/img/belkart-password.png}" alt="Белкарт ИнтернетПароль">
+                            <img th:src="@{/static/img/ipay.png}" alt="iPay">
+                            <img th:src="@{/static/img/erip.png}" alt="ЕРИП">
+                            <img th:src="@{/static/img/assist.png}" alt="Assist"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="to-top-btn" style="display: none;">
+    <svg width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15 7c.73 0 1.42.32 1.9.87l9.5 11a2.5 2.5 0 11-3.8 3.26l-7.6-8.8-7.6 8.8a2.5 2.5 0 11-3.8-3.26l9.5-11A2.5 2.5 0 0115 7z"></path>
+    </svg>
+</div>
+<!-- minsk -->
+<script async="" src="./static/img/asyncjs.php" type="text/javascript"></script>
+<script type="text/javascript">
+    if(!document.getElementById('g5n7n5v9n3v8c2') && typeof ga !=='undefined')ga('send','event','blocking ads','yes',{'nonInteraction':1});
+</script>
+<script>
+    mindbox = window.mindbox || function() { mindbox.queue.push(arguments); };
+    mindbox.queue = mindbox.queue || [];
+    mindbox('create', {
+        endpointId: 'realtby-website'
+    });
+</script>
+<script src="./static/img/tracker.js.Без названия" async=""></script>
+<script id="popmechanic-script" src="./static/img/loader.js.Без названия"></script>
+<!--End of PopMechanic script-->
+<script src="./static/img/ads.js.Без названия" type="text/javascript"></script>
+<iframe height="0" width="0" style="display: none; visibility: hidden;" src="./static/img/activityi.html"></iframe>
+<div id="g5n7n5v9n3v8c2" style="display: none;"></div>
+<script type="text/javascript" id="">
+    (function(a,e,f,g,b,c,d){a[b]=a[b]||function(){(a[b].a=a[b].a||[]).push(arguments)};
+        a[b].l=1*new Date;c=e.createElement(f);
+        d=e.getElementsByTagName(f)[0];
+        c.async=1;
+        c.src=g;
+        d.parentNode.insertBefore(c,d)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+    ym(1423951,"init",{clickmap:!0,trackLinks:!0,accurateTrackBounce:!0});
+</script>
+<noscript>
+    <div>
+        <img src="https://mc.yandex.ru/watch/1423951" style="position:absolute; left:-9999px;" alt="">
+    </div>
+</noscript>
+<script type="text/javascript" id="">
+    var _tmr=window._tmr||(window._tmr=[]);
+    _tmr.push({id:"2846289",type:"pageView",start:(new Date).getTime()});
+    (function(c,d,a){if(!c.getElementById(a)){var b=c.createElement("script");
+        b.type="text/javascript";
+        b.async=!0;
+        b.id=a;
+        b.src="//top-fwz1.mail.ru/js/code.js";
+        a=function(){var a=c.getElementsByTagName("script")[0];
+            a.parentNode.insertBefore(b,a)};
+        "[object Opera]"==d.opera?c.addEventListener("DOMContentLoaded",a,!1):a()}})(document,window,"topmailru-code");
+</script>
+<noscript>
+    <div style="position:absolute;left:-10000px;">
+        <img src="//top-fwz1.mail.ru/counter?id=2846289;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru">
+    </div>
+</noscript>
+<script type="text/javascript" id="">
+    (function(d,b,e,c,a){d._uxsSettings={id:"rkgwo7l74dwrvih1wgknri3a"};
+        c=b.getElementsByTagName("head")[0];
+        a=b.createElement("script");a.async=1;a.src=e;
+        c.appendChild(a)})(window,document,"https://cdn.uxfeedback.ru/widget.js");
+</script>
+<style type="text/css">
+    div.uxs-mobile-wrapper { z-index: 9999!important; }
+</style>
+<script type="text/javascript" id="">
+    !function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init","169728038163552");
+    fbq("track","PageView");
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=169728038163552&amp;ev=PageView&amp;noscript=1">
+</noscript>
+
+<script type="text/javascript" id="">
+    var _tmr=window._tmr||(window._tmr=[]);
+    _tmr.push({id:"3199587",type:"pageView",start:(new Date).getTime(),pid:"USER_ID"});
+    (function(c,e,a){if(!c.getElementById(a)){var b=c.createElement("script");
+        b.type="text/javascript";
+        b.async=!0;
+        b.id=a;
+        b.src="https://top-fwz1.mail.ru/js/code.js";
+        a=function(){var d=c.getElementsByTagName("script")[0];
+            d.parentNode.insertBefore(b,d)};
+        "[object Opera]"==e.opera?c.addEventListener("DOMContentLoaded",a,!1):a()}})(document,window,"topmailru-code");
+</script>
+<noscript>
+    <div>
+        <img src="https://top-fwz1.mail.ru/counter?id=3199587;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru">
+    </div>
+</noscript>
+<script type="text/javascript" id="">
+    !function(){var a=document.createElement("script");
+        a.type="text/javascript";
+        a.async=!0;
+        a.src="https://vk.com/js/api/openapi.js?168";
+        a.onload=function(){VK.Retargeting.Init("VK-RTRG-546863-AzpW");
+            VK.Retargeting.Hit()};
+        document.head.appendChild(a)}();
+</script>
+<noscript>
+    <img src="https://vk.com/rtrg?p=VK-RTRG-546863-AzpW" style="position:fixed; left:-999px;" alt="">
+</noscript>
+<script type="text/javascript" id="">
+    (function(){document.body.addEventListener("click",function(a){for(a=a.target;!a.matches("body");){if(a.matches("a.ya-share2__link")){dataLayer.push({event:"onClickSocialShare",socialNetwork:google_tag_manager["GTM-MWGCPJ7"].macro(4)(a.getAttribute("href"))});break}a=a.parentElement}},!0)})();
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html >
+<html xmlns ="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href = "@{/css/style.css}" rel="stylesheet" content-type="text/css">
+</head>
+<body>
+<div class="main-header">
+    <div class="header-top" style="margin-bottom: 0px;">
+        <div class="container">
+            <div class="header-top-content">
+                <div class="header-left">
+                    <div class="region-selection">
+                        <a href="javascript:void(0);" class="d-flex align-items-center color-black">
+                            <svg width="12" height="16" fill="none" class="fill-black" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM8 6a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.13C12 11 6 16 6 16s-6-5-6-9.88A6.06 6.06 0 016 0c3.31 0 6 2.74 6 6.13zm-1 0c0 2.07-1.3 4.3-2.78 6.13A24.31 24.31 0 016 14.66a22.24 22.24 0 01-2.22-2.4C2.3 10.44 1 8.2 1 6.13A5.06 5.06 0 016 1c2.74 0 5 2.27 5 5.13z"></path>
+                            </svg>
+                            <span class="media-body ml-6" th:text = "${gorod} + ' обл.'"></span>
+                        </a>
+                        <div id="city-selection" class="list-group list-group-sm list-group-flush">
+                            <a class="list-group-item color-black" href="/" data-id="5">Минск и обл.</a>
+                            <a class="list-group-item color-black" href="/brest-region" data-id="1">Брест и обл.</a>
+                            <a class="list-group-item color-black" href="/vitebsk-region" data-id="2">Витебск и обл.</a>
+                            <a class="list-group-item color-black" href="/gomel-region" data-id="3">Гомель и обл.</a>
+                            <a class="list-group-item color-black" href="/grodno-region" data-id="4">Гродно и обл.</a>
+                            <a class="list-group-item color-black" href="/mogilev-region" data-id="6">Могилев и обл.</a>
+                        </div>
+                    </div>
+                    <a href="https://realt.by/statistics/" target="_blank" data-toggle="tooltip" class="color-success d-inline-flex d-sm-none d-lg-flex flex-grow-1 index-price" title="" data-original-title="Индекс цен предложения на квартиры в Минске"> $ 1.225 м² </a>
+                </div>
+                <div class="header-right">
+                    <a href="javascript:void(0);" onclick="javascript:showLoginBox(&#39;Для просмотра заявок необходимо войти на сайт, используя один из способов авторизации!&#39;);" class="media align-items-center" title="Для использования этой функции зарегистрируйтесь или войдите на сайт!">
+                        <svg width="14" height="12" fill="none" class="fill-gray" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 0a2 2 0 00-2 2v8.99c0-.37.1-.75.33-1.1l2.63-4c.37-.55.99-.89 1.66-.89H10V4a2 2 0 00-2-2H6a2 2 0 00-2-2H2z">
+
+                            </path>
+                            <path d="M4.62 6a.98.98 0 00-.82.45l-2.63 4A1 1 0 001.99 12h8.4c.32 0 .63-.17.81-.45l2.63-4A1 1 0 0013.01 6h-8.4z">
+
+                            </path>
+                        </svg>
+                        <span class="media-body ml-6"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="javascript:showLoginBox(&#39;Чтобы посмотреть сообщения необходимо войти на сайт, используя один из способов авторизации!&#39;);" class="media align-items-center" title="Для использования этой функции зарегистрируйтесь или войдите на сайт!">
+                        <svg width="14" height="12" fill="none" class="fill-gray" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.97 1.68A2 2 0 0012 0H2A2 2 0 00.03 1.68l5.77 4.9c.65.56 1.75.56 2.4 0l5.77-4.9z"></path>
+                            <path d="M14 2.97L8.85 7.35a2.95 2.95 0 01-3.7 0L0 2.97V10c0 1.1.9 2 2 2h10a2 2 0 002-2V2.97z"></path>
+                        </svg>
+                        <span class="media-body ml-6"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="javascript:showLoginBox(&#39;Чтобы посмотреть избранное необходимо войти на сайт, используя один из способов авторизации!&#39;);" class="media align-items-center" title="Для использования этой функции зарегистрируйтесь или войдите на сайт!">
+                        <svg width="14" height="12" fill="none" class="fill-gray" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2.41A4.26 4.26 0 004.44.13C3.08-.27 1.6.23.58 1.85A3.5 3.5 0 00.04 4.3c.13.82.54 1.6 1.13 2.39 1.16 1.54 3.16 3.23 5.57 5.22a.4.4 0 00.52 0c2.4-2 4.4-3.68 5.57-5.22.59-.78 1-1.57 1.13-2.4a3.5 3.5 0 00-.54-2.44c-1-1.61-2.5-2.12-3.86-1.72A4.26 4.26 0 007 2.4z"></path>
+                        </svg>
+                        <span class="media-body ml-6"></span>
+                    </a>
+                    <div class="auth-link">
+                        <a href="/account" class="btn btn-outline-gray btn-sm btn-icon">
+                            <svg width="14" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 6a3 3 0 100-6 3 3 0 000 6zM5.06 6.72A4.43 4.43 0 000 11.12c0 .48.4.88.89.88H13.1c.5 0 .89-.4.89-.89 0-2.7-2.39-4.77-5.06-4.39l-.55.08c-.92.13-1.86.13-2.78 0l-.55-.08z"></path>
+                            </svg>
+                            <span>Войти</span>
+                        </a>
+                    </div>
+                    <div class="currency-calc">
+                        <a class="btn btn-sm">
+                            <div class="currency-calc-items">
+                                <span>BYN</span>
+                                <span>USD</span>
+                            </div>
+                        </a>
+                        <div class="list-group list-group-sm list-group-flush">
+                            <div class="list-group-item color-graydark fs-small lh-small">Калькулятор валют:</div>
+                            <a class="list-group-item color-primary" data-currency="840" title="Показывать в Белорусских рублях + в Долларах США">BYN / USD</a> <a class="list-group-item color-black" data-currency="978" title="Показывать в Белорусских рублях + в Евро">BYN / EUR</a>
+                            <a class="list-group-item color-black" data-currency="643" title="Показывать в Белорусских рублях + в Российских рублях">
+                                BYN / RUB
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class = "container">
+    <button><a href="/addflat">Добавить квартиру</a></button>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns ="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type = "text/css">
+        .table_price {
+            border-collapse: collapse;
+            border-left: 3px solid #F79361;
+            border-right: 3px solid #F79361;
+            border-bottom: 3px solid #F79361;
+            font-family: "Lucida Grande", sans-serif;
+        }
+        .table_price caption {
+            background: #F79361;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px  4px 0 rgba(0,0,0,.3);
+            color: white;
+            font-family: "Roboto Slab",serif;
+            font-style: normal;
+            font-size: 26px;
+            text-align: center;
+            margin: 0;
+        }
+        .table_price td, .table_price th {
+            padding: 10px;
+        }
+        .table_price th {
+            text-align: left;
+            font-size: 18px;
+        }
+        .table_price tr:nth-child(2n) {
+            background: #E5E5E5;
+        }
+        .table_price td:last-of-type {
+            text-align: center;
+        }
+        .table_price a {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #F79361;
+            box-shadow: 2px 2px 0 0 #a22800;
+            position: relative;
+        }
+        .table_price a:hover {
+            box-shadow: none;
+            top: 2px;
+            left: 2px;
+        }
+    </style>
+</head>
+<body>
+<table class="table_price">
+    <caption>Агенты недвижимости</caption>
+    <tr>
+        <th>Идентификационная карточка №</th>
+        <th>ФИО</th>
+        <th>Должность</th>
+        <th colspan="4">Опыт</th>
+    </tr>
+    <tr th:each = "specialist : ${specialists}">
+        <td th:text="${specialist.idnum}"></td>
+        <td th:text = "${specialist.name} + ' ' + ${specialist.surname}"></td>
+        <td th:text = "${specialist.post}"></td>
+        <td th:text="${specialist.exp}"></td>
+        <td><a th:href = "'/confirm?confirm=1&id='+${specialist.idspecialist}">Confirm</a></td>
+        <td><a th:href = "'/confirm?confirm=0&id='+${specialist.idspecialist}">Refuse</a></td>
+    </tr>
+</table>
+<a href="/addagency">Добавить агенство недвижимости</a>
+</body>
+</html>
